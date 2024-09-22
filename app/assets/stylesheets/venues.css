@@ -1,0 +1,21 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+#custom-handle {
+  width: 3em;
+  height: 1.6em;
+  top: 50%;
+  margin-top: -.8em;
+  text-align: center;
+  line-height: 1.6em;
+}
+
+.ion-range-slider {
+  width: 100%;
+}
+
+.ion-range-slider-bar {
+  background: #ccc;
+}
+

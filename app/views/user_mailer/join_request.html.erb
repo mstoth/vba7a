@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content = "text/html; charset-UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+<p>
+	<b>Hello from Virtual Booking Agent.</b><br/>
+	<br/>
+    <%= @user.name %> would like to join , <%= @group.title %> <br/> 
+    <%= If you would like to admit him or the group, click on this link. %>
+    <%= link_to "Admit",/groups/@group.id/admit/@user.id %>
+    
+<br/><br/>
+Problems?  contact Michael Toth, (michael@virtualpianist.com)
+</p>
+</body>
+</html>

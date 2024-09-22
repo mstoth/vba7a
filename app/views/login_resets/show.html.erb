@@ -1,0 +1,12 @@
+<div class='form_heading'>
+<h1>Your Login</h1>
+<% if @user.nil? %>
+Unknown Email
+<% else %>
+<%= @user.login %>
+<% end %>
+<br/>
+<br/>
+<br/>
+<a href='/' data-no-turbolink="true">Home</a>
+</div>

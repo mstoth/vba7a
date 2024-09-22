@@ -1,0 +1,21 @@
+
+<div class="form_heading">
+	<br/><br/>Join a Group</div>
+
+	<% if @groups.length > 0 %>
+	<table class="center">
+		<% @groups.each do |g| %>
+		<tr><td>
+			<%= link_to g.title, g %>
+		</td></tr>
+		<% end %>
+	</table>
+	<% else %>
+	<div id="notes">
+		There are no groups available to join.  If you haven't created your group, go to <%= link_to "Manage My Groups", groups_path %> and create it.  Make sure it is unlocked when you create it.  Then after everyone in the group has joined, click on "Locked" (while editing the group) to lock it from further members. 
+	</div>
+	<% end %>
+	
+	<div id="notes">
+		You should only join a group that you belong to of course.
+	</div>

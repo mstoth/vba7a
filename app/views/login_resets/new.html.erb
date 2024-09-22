@@ -1,0 +1,19 @@
+<br/><br/>
+<br/><br/><p id="notice"><%= notice %></p>
+
+<div class="form_heading">
+	Login Retrieval</div>
+	
+	<%= form_tag("/login_resets/search",method:"get") do %>
+
+<table class="center">
+
+ <tr><td>
+		<%= label_tag(:email, 'Enter your email ')%></td><td>
+		<%= text_field_tag( :email) %></td></tr><tr><td>
+		<%= submit_tag(:submit) %>
+</td></tr>
+
+</table>
+
+ <% end %>

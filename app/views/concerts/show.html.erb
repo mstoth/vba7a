@@ -1,0 +1,92 @@
+<p id="notice"><%= notice %></p>
+<% if @concert.price %>
+<div class="form_heading"><br/><%=h @concert.title %> ($<%= sprintf("%.2f",@concert.price) %>)</div>
+<% else %>
+<div class="form_heading"><br/><%=h @concert.title %> </div>
+<% end %>
+<br/><br/>
+
+<table class="center">
+	<tr>
+		<td>
+			<b>Genre:</b>
+		</td>
+		<td>
+			<%= @concert.genre %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<b>Group:</b>
+		</td>
+		<td>
+  			<%= link_to Group.find(@concert.group_id).title, Group.find(@concert.group_id) %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<b>Webpage:</b>
+		</td>
+		<td>
+			<%= link_to "Concert Description",@concert.webpage %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<% if @concert.offer == false %>
+				<b>Booked at: </b>
+		</td>
+		<td>
+				<%= link_to Venue.find(@concert.venue_id).name, Venue.find(@concert.venue_id) %>
+				
+				<br/><br/>
+				<% if @concert.date.nil? %>
+				(No Date Available)
+				<% else %>
+				<%= @concert.date.strftime("%A %B %d %Y, %r") %>
+				<% end %>
+			<% end %>
+		</td>
+	<% if @concert.pieces.count > 0 %>
+	<tr> <b> <td><b>Composer</b></td><td><b>Title</b></td><td><b>Recording</b></td></tr><br/></b>
+		<% @concert.pieces.each do |p|%>
+			<tr>
+				<td> <%= p.composer %></td>
+				<td> <%= p.title %> </td>
+				<td> <%= link_to 'Listen',p.recording %> </td>
+			</tr>
+		<%end%>
+	<% end %>
+
+	<% if @concert.offer == false %>
+		<tr><td>
+		</td><td>
+		<b><br/><br/>Reviews:</b>
+	</td></tr>
+
+	<td>
+		<% if @concert.reviews.count > 0 %>
+		<% @concert.reviews.each do |r| %>
+		<tr><td><%= r.title %> </td><td> <%= link_to "Show Review",review_path(r.id) %> </td></tr>
+		<% end %>
+		<% else %><br/><br/>
+		<h4>No reviews yet, write the first one.</h4>
+		<% end %>
+	</td>	
+	<% end %>	    
+	</tr>
+
+</table>
+
+<br/>
+
+<div id="footerlinks">
+<% if @can_edit %>
+<%= link_to 'Edit',  edit_concert_path(@concert) %> 
+<% end %> <br/><br/>
+<%= link_to "Write a Review",new_review_path(:cid=>@concert.id) %> | <%= link_to 'Back to Concerts', "/concerts"%>
+</div>
+
+<div id="notes">
+<%= link_to "I'd Like to Book This Concert.", "/concerts/#{@concert.id}/book" %>
+	</div>

@@ -1,0 +1,57 @@
+
+
+<div class="form_heading">
+<br/><br/>
+<br/>
+
+
+
+<table class="center" style="width:300px"><tr><td><div id="current_value"></div></td><td>
+     <div class="slidecontainer">
+  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+</div>
+
+	  <%= form_with scope: :venue, genre: "NA", url: concerts_near_path(@venue.id), :method=>"get", :id=>@venue.id,
+      local: false  do |form| %>
+      Distance in Miles
+	<input id="distance" type="text" class="js-range-slider" name="distance" />
+	<input type="hidden", name="disthid", id="disthid", value=<%= @current_dist %>></input>
+	<input type="submit", name="submit", value="Update"></input>
+	<% end %>
+
+	</td></tr></table>
+<br/>
+Concerts Offered Near You
+</div>
+</br>
+<div id="slider"></div>
+
+<% if @venue.nil? %>
+venue is nil
+<% end %>
+<br/><br/>
+<table class="center">
+<tr><td colspan="4" align="center">
+
+Genre: <%= select_tag :genre, options_for_select(@genres,@genre), :remote=>true, :id=>"genre_select" %>
+
+</td></tr>
+</table>
+
+<br/><br/>
+<%= render "clist", :locals=>{:my_venues=>@my_venues, :selected_concerts=>@selected_concerts, :venue=>@venue} %>
+
+<script>
+var slider = document.getElementById('myRange');
+slider.value = <%= @current_dist %>;
+var txtin = document.getElementById('distance');
+txtin.value = slider.value;
+slider.oninput = function(){
+	txtin.value = this.value;
+}
+
+txtin.onchange = function(){
+	slider.value = this.value;
+}
+
+</script>

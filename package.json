@@ -1,0 +1,32 @@
+{
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "vba7 package",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.30",
+    "esbuild": "^0.23.1",
+    "esbuild-coffeescript": "^2.2.0"
+  },
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
+  },
+  "author": "michael toth",
+  "license": "ISC",
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.5",
+    "@mapbox/mapbox-gl-geocoder": "^5.0.3",
+    "@rails/actiontext": "^7.2.0",
+    "esbuild-rails": "^1.0.7",
+    "flatpickr": "^4.6.13",
+    "jquery": "^3.7.1",
+    "mapbox-gl": "^3.6.0",
+    "trix": "^2.1.5"
+  },
+  "repository": "git@github.com:mstoth/vba7.git"
+}

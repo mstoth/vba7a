@@ -1,0 +1,83 @@
+
+
+  <%= form_for @group,  html: {multipart: true}  do |f| %>
+
+  <% if @group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
+
+      <ul>
+      <% @group.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<table class="center">
+<tr><td align="right">
+    <%= f.label :title %></td><td>
+    <%= f.text_field :title %>
+</td></tr>
+<tr><td align="right">
+    <%= f.label :contact %></td><td>
+    <%= f.text_field :contact %>
+</td></tr>
+<tr><td align="right">
+    <%= f.label :phone %></td><td>
+    <%= f.text_field :phone %>
+</td></tr>
+<tr><td align="right">
+    <%= f.label :image %></td><td>
+    <%= f.file_field :image %>
+</td></tr>
+<tr><td align="right">
+    <%= f.label "Picture Thumbnail: " %></td><td>
+<% if @group.image.attached? then %>
+	<%= image_tag @group.image %>
+<% end %>
+</td></tr>
+<tr><td align="right">
+    <%= f.label :website %></td><td>
+    <%= f.text_field :website %> <br/><br/>(Leave blank if no web site)
+</td></tr>
+<tr><td align="right">
+    <%= f.label :email %></td><td>
+    <%= f.text_field :email %>
+</td></tr>
+<tr><td align="right">
+    <%= f.label :zip %></td><td>
+    <%= f.text_field :zip %>
+</td></tr>
+<tr><td align="right">
+    <%= f.label :locked %></td><td>
+    <%= f.check_box :locked %> 
+</td></tr>
+<tr><td align="right">
+  <%= f.file_field :image_files %>
+</td></tr>
+<tr><td align="right">
+    <%= f.check_box :display %> </td><td>
+    <%= f.label :display, "Display Group Picture on Virtual Booking Agent" %></td><td>
+</td></tr>
+<tr><td>
+    <%= f.submit %>
+</td></tr>
+</table>
+
+<% end %>
+<% if !@concerts.nil? %>
+<div id="notes">
+  <%= month_calendar(start_date_param: :date, events: @concerts) do |date,concerts| %>
+  <%= date %>
+  <% concerts.each do |concert| %>
+  <div>
+    <%= concert.title %>
+  </div>
+  <% end %>
+  <% end %>
+</div>
+<% end %>
+<div id="notes">
+	Select "Locked" when all members of the group have joined. 
+</div>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Welcome to virtualbookingagent.com, <%= @user.login %></h1>
+    <p>
+      You have successfully signed up as a guest to Virtual Booking Agent.<br/>
+      <br/>
+      Your login and your password are: <%= @user.login %>.<br/>
+      <br/>
+      You can (and probably want to!) change this in your profile. <br/>
+      <br/>
+      NOTE: THIS IS AN EXPERIMENTAL WEB SITE.<br/> CONSTRUCTIVE FEEDBACK SHOULD GO TO MICHAEL@VIRTUALPIANIST.COM.<br/>
+
+      <br/>
+      As a guest, there is not a whole lot you can do.  Perhaps in the future this can be improved.  You can search but you can't create or hire groups and concerts. <br/>
+      If you registered, you would have full access.  It is free. Your data is not shared with anyone. 
+      <br/>
+      
+	  <% if @user.notify %>
+		You will be notified of new concerts and groups.
+	  <% else %>
+		You will not be notified of new groups and concerts.
+	  <% end %>
+	  <br/>
+	  If you want to change this, go to <%= @url %> and modify your profile settings. 
+	  <br/>
+    </p>
+      <br/>
+    <p>
+      To login to the site, just follow this link: <%= @url %>.
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

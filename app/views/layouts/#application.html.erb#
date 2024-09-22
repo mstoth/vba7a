@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VIRTUAL BOOKING AGENT</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+<%= javascript_include_tag "vba" %>
+<%= javascript_include_tag "concerts" %>
+<%= javascript_include_tag "groups" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div class="heading">
+		<div id="leftside">
+			<%=link_to "Home", :home %>
+			<% if !current_user.nil? %>
+				<%=link_to "Logout", :logout  %>
+			<% else %> 
+				<%=link_to "Login", :login  %>
+			<% end %>
+			<% if !current_user.nil? && (current_user.login == "mstoth") %>
+				<%= link_to "Admin", "/admins/index" %>
+			<% end %>
+			<% if Group.all.length > 0 %>
+				<% g=Group.where(:image.blob.filename=>nil) %>
+				<% group_array = Group.all - g %>
+				<% sel = rand(group_array.length) %>
+				<% group = group_array[sel] %>
+				<% if !group.nil? %>
+				<%= image_tag group.picture.url(:medium) %>
+				<br/>
+				<div id="caption">
+					<%= link_to group.title, group %><br/><br/>
+				</div>
+				<% end %>
+			<% end %>
+			
+			<div id="social_left">
+			</div>
+		</div>
+
+	<div id="centertext">
+		<% if current_user.nil? %>
+			Virtual Booking Agent 
+		<% else %>
+			<% if current_user.login[0..4] == "Guest" %>
+				Virtual Booking Agent - Logged in as Guest
+			<% else %>
+				Virtual Booking Agent - Logged in as <%=current_user.login%>
+			<% end %>
+		<% end %>
+	</div>
+	
+	<div id="rightside">
+		<%= link_to "About", :about %>
+		<%= link_to "Help ", :agenthelp %>
+		<%= link_to "Forum", "http://www.virtualpianist.com/forums1.6/forumdisplay.php?fid=3" %>
+
+		
+		<% if Venue.all.length > 0 %>
+			<% v=Venue.where(:image.blob.filename => nil) %>
+			<% venue_array = Venue.all - v %>
+			<% sel = rand(venue_array.length) %>
+			<% venue = venue_array[sel] %>
+			<% if !venue.nil? %>
+			<% if !venue.image.blob.filename.nil? %>
+				<%= image_tag venue.vpic.url(:medium) %>
+				<br/>
+				<div id="caption">
+					<%= link_to venue.name, venue %>
+				</div>
+			<% end %>
+			<% end %>
+		<% end %>
+<!--
+		<% if !current_user.nil? %>
+			<div id="social_right"><table><tr><td>
+				Booked Concerts: </td><td><%= current_user.my_concerts(false).length %></td></tr>
+				<tr><td>
+				Offered Concerts: </td><td> <%= current_user.my_concerts(true).length %></td></tr>
+				<tr><td>
+				Number of Groups: </td><td> <%= current_user.groups.length %></td></tr>
+				<tr><td>
+				Number of Venues: </td><td> <%= current_user.venues.length %>
+				</td></tr></table>
+			</div>
+		<% end %> 
+-->
+
+	</div>
+	</div>	
+
+	<%= yield %>
+
+	<div id="bottom">
+	</div>
+</body>
+</html>

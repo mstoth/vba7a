@@ -1,0 +1,39 @@
+<table class="center"><tr><td>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @piece.title %>
+</p>
+
+<p>
+  <strong>Composer:</strong>
+  <%= @piece.composer %>
+</p>
+
+<p>
+  <strong>Concert:</strong>
+  <%= Concert.find(@piece.concert_id).title %>
+</p>
+
+
+<p>
+  <strong>Songtype:</strong>
+  <%= @piece.songtype %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @piece.duration %>
+</p>
+
+<p>
+  <strong>Recording:</strong>
+  <%= link_to 'Link',@piece.recording %>
+</p>
+</td></tr></table>
+<div id="footerlinks"> 
+<%= link_to 'Edit', edit_piece_path(@piece) %> |
+<%= link_to 'Back', pieces_path %> |
+<%= link_to 'Continue Editing Concert', "/concerts/#{@piece.concert_id}/edit" %>
+</div>

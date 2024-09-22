@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<%= javascript_include_tag "groups" %>
+<%= form_for(@concert) do |f| %>
+  <% if @concert.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@concert.errors.count, "error") %> prohibited this concert from being saved:</h2>
+
+      <ul>
+      <% @concert.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= hidden_field_tag 'current_date', @concert.date%>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %> <small>(The title of your concert)</small>
+  </div><br/>
+  <div class="field">
+    <%= f.label :genre %>(Classical, Jazz, etc.)<br />
+    <%= f.text_field :genre %>
+  </div><br/>
+  <div class="field">
+    <%= f.label "This is an offering " %>
+    <%= f.check_box  :offer, :id=>"offer", :class=>"offerCheckbox", remote: true %><small> (Select this if this is a concert offering.)</small>
+  </div><br/>
+  <div class="disthid">
+    <input type="hidden", name="disthid", id="disthid", value="100"></input>
+  </div>
+  
+  <div id="price", class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price, :size=>10 %><small> (You can leave this blank if you don't have a fixed price.)</small>
+  </div>
+  <div id="notoffer", name="notoffer" >
+  <br/>
+
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
+    <%= f.label :date %>&nbsp;
+    <%= f.text_field :date, :class=>"concert_date" %><br/> 
+    <br/>
+    <%= f.label :venue_id %>&nbsp;
+    <%= f.select :venue_id, options_from_collection_for_select(@venues,:id,:name,@concert.venue_id) %>
+  </div>
+
+  <br/>
+  <div class="field">
+    <%= f.label :group_id %>&nbsp;
+    <%= f.select :group_id, options_from_collection_for_select(@groups,:id,:title,@concert.group_id) %>
+  </div><br/>
+  <div class="field">
+    <%= f.label :webpage %><small> (ex. http://mywebpage.com) </small><br />
+    <%= f.text_field :webpage %> &nbsp;
+    <%= check_box_tag "no_webpage", "false", false %>No web page for concert <br/>
+    <br/>
+    <small>(This web page describes the concert.)</small>
+  </div>
+  <br/>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<div id="widenotes">
+  <h3><%= link_to "Pieces",pieces_path  %> (<%= @concert.pieces.count %>)</h3>
+  <h4>Total Music Time = <%= @concert.length[0] %> minutes, <%= @concert.length[1] %> seconds.</h4>
+
+  <% if @piece.nil? %>
+  <%= link_to "Add Piece", "/concerts/#{@concert.id}/addpiece/0" %>
+  <% else %>
+  <%= link_to "Add Piece", "/concerts/#{@concert.id}/addpiece/@piece.id" %>
+  <% end %>
+  <br/>
+  Actual program time will be longer and is concert dependent.
+<hr/>
+<ul>
+  
+  <% @concert.pieces.each do |p| %>
+<li>
+  <%= link_to p.title,p %> - <%= link_to "REMOVE","/pieces/#{p.id}/remove" %>
+
+</li>
+  <% end %>
+</ul>
+</div>
+

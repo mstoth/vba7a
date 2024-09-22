@@ -1,0 +1,69 @@
+$(document).ready(function(){
+
+    window.addEventListener("load", () => {
+
+	const element = document.querySelector(".concert_date");
+
+	element.addEventListener("ajax:success", (event) => {
+	    const [_data, _status, xhr] = event.detail;
+	    
+	    element.insertAdjacentHTML("beforeend", xhr.responseText);
+	});
+
+	element.addEventListener("ajax:error", () => {
+	    element.insertAdjacentHTML("beforeend", "<p>ERROR</p>");
+	});
+    });
+
+
+    <%# $('.concert_date').flatpickr({
+	enableTime: true,
+	dateFormat: "F, d Y H:i"
+    }); %>
+
+});
+
+$(document).ready(function(){
+    <%# $('.concert_date').flatpickr({
+	enableTime: true,
+	dateFormat: "F, d Y H:i"
+    }); %>
+    
+    window.addEventListener("load", () => {
+	
+
+
+	const element = document.querySelector(".concert_date");
+
+	$( ".concert_date" ).change(function() {
+	    // Old compatibility code, no longer needed.
+
+
+	    if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+		httpRequest = new XMLHttpRequest();
+	    } else if (window.ActiveXObject) { // IE 6 and older
+		httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+	    }
+
+	    
+	    var concert_id = <%=@concert.id%>;
+	    var d = this.value;
+
+	    print( '/concerts/${concert_id}/reserve');
+	    httpRequest.open('POST', '/concerts/${concert_id}/reserve', true);
+	    httpRequest.send();
+	    
+	});
+
+	element.addEventListener("ajax:success", (event) => {
+	    const [_data, _status, xhr] = event.detail;
+	    element.insertAdjacentHTML("beforeend", xhr.responseText);
+	    alert('hi')
+	});
+
+	element.addEventListener("ajax:error", () => {
+	    element.insertAdjacentHTML("beforeend", "<p>ERROR</p>");
+	});
+    });
+
+});

@@ -1,0 +1,98 @@
+<p id="notice"><%= notice %></p>
+<%= javascript_include_tag "concerts" %>
+
+<div class="form_heading">
+	<br/>
+	<br/>
+	Your Offered Concerts
+</div>
+
+<table class="center">
+	<tr>
+		<th>Title</th>
+		<th>Group</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+
+	<% @offered_concerts.each do |concert| %>
+	<tr>
+		<td><%= concert.title %></td>
+		<td><%= Group.find(concert.group_id).title %></td>
+		<td><%= link_to 'Show', concert %></td>
+		<td><%= link_to 'Edit', edit_concert_path(concert) %></td>
+		<td><%= link_to "Delete", concert_path(concert), :method=>:delete, :confirm=>"Are you sure?", :remote=>:true, :class=>"alert" %>
+	</tr>
+	<% end %>%
+	</table>
+
+	<br />
+	<div id="footerlinks">
+	<%= link_to 'New Concert', new_concert_path %>
+</div>
+
+<div class="form_heading">
+	<br/>
+	<br/>
+	Your Booked Concerts 
+</div>
+
+<table class="center">
+	<tr>
+		<th>Title</th>
+		<th>Venue</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+
+	<% @booked_concerts.each do |concert| %>
+	<% if concert.date != nil and concert.date >= Date.today%>%
+	<tr>
+		<td><%= concert.title %></td>
+		<td><%= Venue.find(concert.venue_id).name %></td>
+		<td><%= link_to 'Show', concert %></td>
+		<td><%= link_to 'Edit', edit_concert_path(concert) %></td>
+		<td><%= link_to "Delete", concert_path(concert), :method=>:delete, :confirm=>"Are you sure?", :remote=>:true, :class=>"alert" %>
+	</tr>
+	<% end %>
+<% end %>
+</table>
+
+
+<br/>
+<div class="form_heading">
+	<br/>
+	<br/>
+	Previous Concerts 
+</div>
+
+<table class="center">
+	<tr>
+		<th>Title</th>
+		<th>Venue</th>
+		<th>Date</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+
+	<% @previous_concerts.each do |concert| %>
+	<% if concert.date != nil %>
+	<tr>
+		<td><%= concert.title %></td>
+		<td><%= Venue.find(concert.venue_id).name %></td>
+		<td><%= concert.date.strftime("%b %d, %Y")%>
+		<td><%= link_to 'Show', concert %></td>
+		<td><%= link_to 'Edit', edit_concert_path(concert) %></td>
+		<td><%= link_to "Delete", concert_path(concert), :method=>:delete, :confirm=>"Are you sure?", :remote=>:true, :class=>"alert" %>
+	</tr>
+	<% end %>
+<% end %>
+</table>
+
+
+<div class='form_heading'>
+	<%= link_to 'Print Friendly Version', :printable_concerts %>
+</div>

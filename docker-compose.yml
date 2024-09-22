@@ -1,0 +1,24 @@
+services:
+  db:
+    image: postgres:13-bookworm
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: G1nestera
+      POSTGRES_DB: vba_development
+  web:
+    build: .
+    command: bash -c "bin/dev" 
+    # command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'" 
+#    CMD bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes: 
+      - .:/myapp
+      - ./docker/database.yml:/myapp/config/database.yml
+    environment: 
+      POSTGRES_HOST: db
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+

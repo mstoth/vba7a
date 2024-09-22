@@ -1,0 +1,5 @@
+<% if @user.nil? %>
+Can't find login
+<% else %>
+Your login is <%= @user.login %>
+<% end %>

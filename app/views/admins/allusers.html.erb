@@ -1,0 +1,29 @@
+<div class="form_heading">
+<br/>
+<br/>
+Users
+</div>
+
+
+<table class="center">
+  <tr>
+    <th>Email</th>
+    <th>ID</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @users_list.each do |u| %>
+  <tr>
+    <td><%= u.email %></td>
+    <td><%= u.id %></td>
+    <td><%= link_to 'Show', u %></td>
+    <td><%= link_to "Delete", "/admins/delete_user?id=#{u.id}", :method=>"post",
+		:confirm=>"Are you sure?", :remote=>:true, :class=>"alert" %>
+  </tr>
+<% end %>
+</table>
+
+<div id="footerlinks">
+<%= link_to 'Back','/admins/index' %>
+</div>

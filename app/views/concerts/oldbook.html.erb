@@ -1,0 +1,104 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css">
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+      
+    //   $('.concert_date').flatpickr({
+	  // enableTime: true,
+	  // dateFormat: "F, d Y H:i"
+    //   });
+      
+      window.addEventListener("load", () => {
+
+	  const element = document.querySelector(".concert_date");
+
+	  $( ".concert_date" ).change(function() {
+	      // Old compatibility code, no longer needed.
+	      if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+		  httpRequest = new XMLHttpRequest();
+	      } else if (window.ActiveXObject) { // IE 6 and older
+		  httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+	      }
+	      
+	      var concert_id = <%=@concert.id%>;
+	      var d = this.value;
+	      print("IN CHANGE");
+	      print(concert_id);
+	      print(d);
+	  });
+
+	  element.addEventListener("ajax:success", (event) => {
+	      const [_data, _status, xhr] = event.detail;
+	      element.insertAdjacentHTML("beforeend", xhr.responseText);
+	      alert('success')
+	  });
+
+	  element.addEventListener("ajax:error", () => {
+	      element.insertAdjacentHTML("beforeend", "<p>ERROR</p>");
+	      alert('error')
+	  });
+      });
+  });
+  </script>
+
+
+
+<div class="disthid">
+  <input type="hidden", name="disthid", id="disthid", value="100"></input>
+</div>
+
+
+<div class="form_heading"><br/><br/>Book Concert</div>
+
+<br/>
+<div class="home", style="text-align:center">
+  <h3 style="width:40%; margin-left:auto; margin-right:auto;" >When would you like to book <%=@concert.title%>?</h3>
+
+
+  <br/>
+
+  <%= form_with model: @concert do |form| %>
+  <input type="text" class='concert_date' >
+  <%= form.submit "Check Date" %>
+  <% end %>
+
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  <% bc=[] %>
+  <div class="cal">
+    <h3 style="text-align:center">Concert Schedule for <%=@group.title%></h3>
+    <%= week_calendar(events: @booked_concerts) do |date, concert| %>
+    <%= date %>
+    <% @booked_concerts.each do |concert| %>
+    <% if date == Date.parse(concert.date.to_s) %>
+    <div>
+      <%= concert.title %>
+    </div>
+    <% end %>
+    <% end %>
+    <% end %>
+  </div>
+
+  <div class="concerts_calendar">
+    <%= calendar(attribute: :date, events: @booked_concerts) do |date,booked_concerts| %>
+    <%= date %>
+    <% booked_concerts.each do |concert| %>
+    <div>
+      <%= link_to concert.title, concert_path(concert) %>
+    </div>
+    <% end %>
+    <% end %>
+
+  </div>
+
+</div>
+<div class="disthid">
+  <input type="hidden", name="disthid", id="disthid", value="100"></input>
+</div>
+<br/>
+<div id="footerlinks">
+  <%= link_to 'Back', concerts_path %>
+</div>

@@ -1,0 +1,35 @@
+  
+
+
+<div id="slider">
+  <div id="custom-handle" class="ui-slider-handle"></div>
+</div>
+
+
+<br/>
+<table class="center" style="width:300px"><tr><td><div id="current_value"></div></td><td>
+
+	<%= form_tag '/users/venues_near_me', :method=>"get" do %>
+		Distance in Miles
+	<input id="distance" type="text" name="distance" />
+	<label name="distlbl" id="distlbl"><%= @current_dist %></label>
+	<input name="disthid", id="disthid", type="hidden", value="<%= @current_dist %>"></input>
+	<input type="submit", name="submit", value="Update"></input>
+	<% end %>
+		
+	</td></tr></table>
+
+
+<table class="center"><tr><td>
+<ul>
+<% @venues.each do |g| %>
+	<li><%= link_to g.name,g %></li>
+<% end %>
+</ul>
+</td></tr></table>
+<% if @venues.length == 0 %>
+	<div id="notes">
+		There are no venues near you who are registered yet.  Contact places you know nearby to get them to sign on. 
+		</div>
+<% end %>
+

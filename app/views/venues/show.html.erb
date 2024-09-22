@@ -1,0 +1,93 @@
+<br/><br/><p id="notice"><%= notice %></p>
+<div class="center">
+<% unless @venue.image.filename.nil? %>
+<%= image_tag @venue.image %>
+<% end %>
+</div>
+
+<table class="center">
+	<tr><td>
+		<b>Name:</b>
+	</td><td>
+		<%= @venue.name %>
+	</td></tr>
+	<tr><td>
+		<b>Contact:</b>
+	</td><td>
+		<%= @venue.contact %>
+	</td></tr>
+	<tr><td>
+		<b>Phone:</b>
+	</td><td>
+		<%= @venue.phone %>
+	</td></tr>
+	<tr><td>
+		<b>Email:</b>
+	</td><td>
+		<%= mail_to @venue.email %>
+	</td></tr>
+	<tr><td>
+		<b>Street1:</b>
+	</td><td>
+		<%= @venue.street1 %>
+	</td></tr>
+	<tr><td>
+		<b>Street2:</b>
+	</td><td>
+		<%= @venue.street2 %>
+	</td></tr>
+	<tr><td>
+		<b>City:</b>
+	</td><td>
+		<%= @venue.city %>
+	</td></tr>
+	<tr><td>
+		<b>State:</b>
+	</td><td>
+		<%= @venue.state %>
+	</td></tr>
+	<tr><td>
+		<b>Zip:</b>
+	</td><td>
+		<%= @venue.zip %>
+	</td></tr>
+	<tr><td>
+		<b>Website:</b>
+	</td><td>
+		<%= link_to @venue.website,@venue.website %>
+	</td></tr>	
+
+	<tr><td>
+		<iframe width='100%' height='400px' 
+		src="https://api.mapbox.com/styles/v1/mstoth/cm1b7l06300n601qkg87mgk9d.html?title=false&access_token=pk.eyJ1IjoibXN0b3RoIiwiYSI6ImNtMTVrZHR6ZDA5M20yanB1bTQ4YXB3dGIifQ._0HqAQDNOJP2jvek6yrT2g&zoomwheel=false#2/20/0" title="Mapbox Basic" style="border:none;"></iframe>
+</div>
+</td></tr>
+</table>
+<br/>
+<% if !current_user.nil? %>
+<div id="footerlinks">
+	<% if current_user.venues.include? @venue %>
+	<%= link_to 'Edit', edit_venue_path(@venue) %> 
+	<% end %>
+</div>
+<% end %>
+
+<div id="notes">
+<b>Concerts at this venue:</b><br/>
+<br/>
+<% if @concerts.length > 0 %>
+	<% @concerts.each do |c| %>
+		<%= link_to c.title, c.webpage %><br/>
+	<% end %>
+<% end %>
+</div>
+	
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoibXN0b3RoIiwiYSI6ImNtMTVrZHR6ZDA5M20yanB1bTQ4YXB3dGIifQ._0HqAQDNOJP2jvek6yrT2g';
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        center: [<%=@venue.latitude%>,<%=@venue.longitude%>], // starting position [lng, lat]. Note that lat must be set between -90 and 90
+        zoom: 9 // starting zoom
+    });
+</script>
+<div id="map"></div>

@@ -1,0 +1,5 @@
+<% if @user.nil> %>
+<h2>No Login Found with that email address </h2>
+<% else %>
+<h2>Login is <%= @user.login %></h2>
+<% end %>

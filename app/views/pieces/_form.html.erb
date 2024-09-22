@@ -1,0 +1,69 @@
+<table class="center"><tr><td>
+<%= form_with(model: piece, local: true) do |form| %>
+  <% if piece.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(piece.errors.count, "error") %> prohibited this piece from being saved:</h2>
+
+      <ul>
+      <% piece.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :concert_id %> &nbsp;
+<% if @concert.nil? %>
+    <%= form.select :concert_id, options_from_collection_for_select(@concerts, 'id', 'title',@piece.concert_id) %>
+    <% else %>
+        <%= form.select :concert_id, options_from_collection_for_select(@concerts, 'id', 'title',@concert.id) %>
+<% end %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :composer %>
+    <%= form.text_field :composer %>
+  </div>
+  <div class="field">
+    <%= form.label :songtype %>
+    <%= form.text_field :songtype %>
+  </div>
+
+  <div class="field">
+    <%= form.label :duration %>
+    <%= form.text_field :duration %>
+  </div>
+
+  <div class="field">
+    <%= form.label :recording %>
+    <%= form.text_field :recording %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+</td></tr></table>
+<div id="notes">
+  <div class="form_heading">
+    Previously Used Pieces:
+  </div>
+  <% if !@dummypieces.nil? %>
+  <% @dummypieces.each do |p| %>
+
+  <% if @concert.nil? %>
+  <p>concert is not assigned</p>
+  <% else %>
+  <%= link_to p.title, "/concerts/#{@concert.id}/addpiece/#{@piece.id}" %>
+  <% end %>
+  <% end %>
+  <br/>
+  <% end %>
+  
+</div>

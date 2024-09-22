@@ -1,0 +1,8 @@
+<table class="center"><tr><td>
+<br/>
+<div class="form_heading">Removed <%= @piece.title %></div>
+<br/>
+<div class="widenotes">"<%=@piece.title%> was successfully removed from <%=@concert.title%>."</div>
+<br/>
+<%= link_to 'Back', "/concerts/#{@concert.id}/edit" %>
+</td></tr></table>

@@ -1,0 +1,103 @@
+<br/><br/><p id="notice"><%= notice %></p>
+<div class="center">
+<% unless @group.image.filename.nil? %>
+<%= image_tag @group.image %>
+<% end %>
+</div>
+<table class="center">
+<tr><td>
+  <b>Title:</b>
+</td><td>
+  <%= @group.title %>
+</td></tr>
+<tr><td>
+  <b>Contact:</b>
+</td><td>
+  <%= @group.contact %>
+</td></tr>
+<tr><td>
+  <b>Zip:</b>
+</td><td>
+  <%= @group.zip %>
+</td></tr>
+<tr><td>
+  <b>Website:</b>
+</td><td>
+  <%= link_to "Group Description", @group.website %>
+</td></tr>
+<tr><td>
+  <b>Email:</b>
+</td><td>
+  <%= mail_to @group.email, @group.email %>
+</td></tr>
+</table>
+<br/>
+<% if !current_user.nil? %>
+<div id="footerlinks">
+  <% if current_user.groups.include? @group %>
+  <div id="edit_link">
+<%= link_to 'Edit', edit_group_path(@group)  %>  </div>| 
+
+<% end %>
+<% if current_user.login[0..4] != "Guest"%>
+  <% if @group.locked == false %>
+    <%= link_to 'Join', "/users/join_group/#{@group.id}" %> | 
+  <% end %>
+  <% if current_user.groups.include? @group %>
+    <%= link_to 'Leave', "/users/leave_group/#{@group.id}" %>
+  <% end %>
+<% end %>
+</div>
+<% end %>
+<br/>
+<% ulist=[] %>
+
+<% if @group.users.count > 1 %>
+<div id="notes">
+  Other members of this group:<br/>
+	<% @group.users.each do |u| %>
+	    <%= link_to u.login,u %><br/>
+	<% end %>
+</div>
+<% end %>
+
+
+
+
+
+<% bc=[] %>
+<div class="cal">
+<h3 style="text-align:center">Concert Schedule for <%=@group.title%></h3>
+  <%= week_calendar(attribute: :date, events: @booked_concerts) do |date,booked_concerts| %>
+  <%= date %>
+  <% booked_concerts.each do |concert| %>
+  <div>
+      <%= link_to concert.title, concert_path(concert) %>
+  </div>
+  <% end %>
+  <% end %>
+</div>
+
+
+
+<div id="notes">
+	Concerts offered by this group:<br/>
+	<% @group.concerts.each do |u| %>
+	  <% if u.offer %>
+	  <% if current_user.nil? %>
+	    <%= link_to u.title, concert_path(u) %><br/>
+	  <% else %>
+	    <%= link_to u.title, concert_path(u) %><br/>
+	  <% end %>
+	  <% else %>
+	    <% bc << u %>
+	  <% end %>
+	<% end %>
+	Concerts Booked:<br/>
+	<ul>
+    <% @booked_concerts.each do |c| %>
+	  <li><%= link_to c.title, c %></li>
+	<% end %>
+	</ul>
+</div>
+

@@ -1,0 +1,80 @@
+<p id="notice"><%= notice %></p>
+
+<table class="home">
+<tbody>
+<tr>
+	<% if @venue_id.nil? %>
+	  <td><%= image_tag "concerts_near_me.png", 
+	  :title => "If you are a venue, use this to find the concerts being offered in your area.", 
+	  :class => "homebutton home" %></td>
+	<% else %>
+	  <% if current_user.login[0..4]=="Guest"%>
+	    <td><%= image_tag("concerts_near_me.png", :class=>"homebutton home", :title=>"If you are a venue, use this to find the concerts being offered in your area.") %></td>
+	  <% else %>
+	    <td style="vertical-align: top;"><%= link_to image_tag("concerts_near_me.png", :title=>"If you are a venue, use this to find the concerts being offered in your area.", :id=>"concerts_near_me", :class=>"homebutton home"),
+			concerts_near_path(@venue_id), :class=>"home" %><br>
+	    </td>
+	  <% end %>
+	<% end %>
+
+	<% if current_user.login[0..4]=="Guest" %>
+	  <td><%= image_tag("manage_venues.png", :class=>"homebutton home", :title=>"If you are a venue, add the details of your location here.") %></td>
+	<% else %>
+	  <td style="vertical-align: top;"><%= link_to image_tag("manage_venues.png", :id=>"manage_venues", :title=>"If you are a venue, add the details of your location here.", :class=>"homebutton home"), venues_path, 
+			:class=>"home" %></td>
+	<% end %>
+</tr>
+
+<!-- Second Row -->
+<tr>
+	<% if current_user.login[0..4]=="Guest" %>
+	  <td><%= image_tag("join_group.png",:title=>"If you are a musician, use this to join a group that is already created.", :class=>"homebutton home") %></td>
+	  <td><%= image_tag("manage_concerts.jpg",:title=>"If you are a musician, use this to add to your concerts being offered. You need to create a group before you can create a concert.", :class=>"homebutton home") %></td>
+	<% else %>
+	  <td><%= link_to image_tag("join_group.png",:title=>"If you are a musician, use this to join a group that is already created.", :id=>"join_group", :class=>"homebutton home"), '/groups/join' %></td>
+	  <% if current_user.groups.length == 0 %>
+		<td style="vertical-align: top;"><%= image_tag("manage_concerts.jpg",:title=>"If you are a musician, use this to add to your concerts being offered. You need to create a group before you can create a concert.", :alpha=>".2", :class=>"homebutton home") %></td>
+	  <% else %>
+		<td style="vertical-align: top;"><%= link_to  image_tag("manage_concerts.jpg", 
+	:id=>"manage_concerts", :class=>"homebutton home",:title=>"If you are a musician, use this to add to your concerts being offered. You need to create a group before you can create a concert."), concerts_path %>
+		</td>
+	  <% end %>
+	<% end %>
+</tr>
+
+<!-- Third Row -->
+<tr>
+	<% if current_user.login[0..4]=="Guest" %>
+		<td><%= image_tag("profile.png", :class=>"homebutton home", :title=>"Edit your profile (email, location, etc.)") %></td>
+		<td><%= image_tag("manage_groups.png", :class=>"homebutton home", :title=>"If you are a musician, use this to add or edit your musical groups.") %></td>
+	<% else %>
+		<td style="vertical-align: top;">
+			<%= link_to image_tag("profile.png", :id=>"profile", :title=>"Edit your profile (email, location, etc.)", :class=>"homebutton home"), current_user %></td>
+		<td style="vertical-align: top;"><%= link_to image_tag("manage_groups.png", :title=>"If you are a musician, use this to add or edit your musical groups.", :id=>"manage_groups", :class=>"homebutton home"), 
+			groups_path %></td>
+	<% end %>
+</tr>
+
+
+<tr>
+	<td style="vertical-align: top;"><%= link_to image_tag("groups_near_me.png", :title=>"If you are a venue, use this to find groups that are near you.",
+	:id=>"groups_near_me", :class=>"homebutton home"), "/users/groups_near_me" %></td>
+	<td style="vertical-align: top;"><%= link_to image_tag("venues_near_me.png", :title=>"If you are a musician, use this to find venues that are near you.", :id=>"venues_near_me", :class=>"homebutton home"),
+			"/users/venues_near_me" %></td>
+</tr>
+
+</tbody>
+</table>
+	
+<% if @group_id.nil? && @venue_id.nil? && current_user.login[0..4]!="Guest" %>
+<div id="notes">
+You should either add a group if you are a performer or add a venue if you are a performing venue. 
+</div>
+<% end %>
+
+<% if current_user.login[0..4]=="Guest" %>
+	<div id="notes">
+	  As a guest you can only search for groups and venues near you.  Other features are available after registering.
+	  ENV is <%= ENV["POSTGRES_USER"] %>
+	</div>
+<% end 	%>

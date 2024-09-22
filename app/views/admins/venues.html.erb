@@ -1,0 +1,28 @@
+<div class="form_heading">
+<br/>
+<br/>
+Venues
+</div>
+
+
+<table class="center">
+  <tr>
+    <th>ID</th>
+        <th>Name</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @venues.each do |u| %>
+  <tr>
+    <td><%= u.id %></td>
+        <td><%= u.name %></td>
+    <td><%= link_to 'Show', u %></td>
+    <td><%= link_to "Delete", u, :method=>:delete, :confirm=>"Are you sure?", :remote=>:true, :class=>"alert" %>
+  </tr>
+<% end %>
+</table>
+
+<div id="footerlinks">
+<%= link_to 'Back','/admins/index' %>
+</div>

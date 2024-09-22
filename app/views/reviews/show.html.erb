@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<table class="center">
+<tr><td>
+  <strong>Title:</strong>
+  <%= @review.title %>
+</td></tr>
+
+<tr><td>
+  <strong>Reviewer:</strong>
+  <%= User.find(@review.user_id).login %>
+</td></tr>
+
+<tr><td>
+  <strong>Stars:</strong>
+  <%= @review.stars %>
+</td></tr>
+
+<tr><td>
+  <strong>Comment:</strong>
+  <%= @review.comment %>
+</td></tr>
+
+<tr><td>
+  <strong>Concert:</strong>
+  <%= Concert.find(@review.concert_id).title %>
+</td></tr>
+
+<tr><td>
+  <strong>Venue:</strong>
+  <% vid = Concert.find(@review.concert_id).venue_id %>
+  <%= Venue.find(vid).name %>
+</td></tr>
+</table>
+
+<div id="footerlinks">
+<% @can_edit = true %>
+<% if @can_edit %>
+<%= link_to 'Edit',  edit_review_path(@review) %> 
+<% end %> <br/><br/>
+<%= link_to 'Back to Reviews', reviews_path%>
+</div>
+

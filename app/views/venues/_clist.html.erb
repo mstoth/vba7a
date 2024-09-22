@@ -1,0 +1,21 @@
+
+<table class="center">
+<tr><td><b>Title</b></td><td><b>Genre</b></td><td><b>Group</b></td></tr>
+<% @selected_concerts.each do |c| %>
+<tr>
+<td>
+<%= link_to c.title,c %>
+</td>
+<td>
+<%= c.genre %>
+</td>
+<td>
+  <% if Group.find(c.group_id).nil? %>
+    <h3>Can't find Group for this concert!</h3>
+  <% else %>
+    <%= link_to Group.find(c.group_id).title, Group.find(c.group_id) %>
+  <% end %>
+</td>
+</tr>
+<% end %>
+</table>

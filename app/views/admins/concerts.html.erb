@@ -1,0 +1,30 @@
+<div class="form_heading">
+<br/>
+<br/>
+Concerts
+</div>
+
+
+<table class="center">
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Group ID</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @concerts.each do |u| %>
+  <tr>
+    <td><%= u.id %></td>
+        <td><%= u.title %></td>
+	<td><%= u.group_id %></td>
+    <td><%= link_to 'Show', u %></td>
+    <td><%= link_to "Delete", u, :method=>:delete, :confirm=>"Are you sure?", :remote=>:true, :class=>"alert" %>
+  </tr>
+<% end %>
+</table>
+<br/>
+<div id="footerlinks">
+<%= link_to 'Back','/admins/index' %>
+</div>

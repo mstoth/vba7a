@@ -1,0 +1,85 @@
+<%= javascript_include_tag "concerts" %>
+<%= javascript_include_tag "reviews" %>
+<%= stylesheet_link_tag "reviews" %>
+<%= stylesheet_link_tag "jquery.rating" %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<%= form_for @review, html: {multipart: true} do |form| %>
+  <% if review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+      <ul>
+      <% review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div id="starfieldset" >
+    <span class="star-cb-group">
+      <input class="sitems" type="radio" id="rating-5" name="stars" value="5" checked="checked" /><label for="rating-5">5</label>
+      <input class="sitems" type="radio" id="rating-4" name="stars" value="4" /><label for="rating-4">4</label>
+      <input class="sitems" type="radio" id="rating-3" name="stars" value="3" /><label for="rating-3">3</label>
+      <input class="sitems" type="radio" id="rating-2" name="stars" value="2" /><label for="rating-2">2</label>
+      <input class="sitems" type="radio" id="rating-1" name="stars" value="1" /><label for="rating-1">1</label>
+      <input type="radio" id="rating-0" name="stars" value="0" class="star-cb-clear" /><label for="rating-0">0</label>
+  </span>
+  </div>
+
+  <table class="center">
+    <tr align="center"><td align="center">
+	  <div id="starsid", class="stars">
+      Stars:
+      <% if @review.stars.nil? %> 
+        <% @review.stars=5 %>
+      <% end %>
+      <%= form.number_field :stars , :min=>1, :max=>5%>
+    </div>
+  
+  </td></tr>
+
+    <tr align="center"><td align="center">
+    Concert: <%= form.collection_select  :concert_id, @concert_list, :id, :title %>
+    </td></tr>
+    <tr align="center"><td align="center"> 
+    Performed by: <%= collection_select(@concert.group_id, :group_id, Group.all, :id, :title) %> 
+    </td></tr>
+    <tr align="center"><td align="center"> 
+    at <%= collection_select(@concert.venue_id, :venue_id, Venue.all, :id, :name, {:selected => @concert.venue_id}) %> 
+    </td></tr>
+    <tr align="center"><td align="center"> 
+    on <%= collection_select(@concert.date, :date, Concert.where("date < ?",Date.today), :id, :date) %>  
+    </td></tr>
+      
+    <tr align="center"><td align="center">
+    <%= form.label "Title of Review" %>
+    <%= form.text_field :title %>
+    </td></tr>
+
+
+<tr><td>
+  </td></tr>
+  
+	<tr><td align="right">
+	    <div class="field">
+    <%= form.label :comment %>
+    <%= form.text_area :comment, :cols => 60, :rows => 10 %>
+  </div>
+
+  </tr></td>
+
+	<tr><td align="right">
+		<div class="actions">
+    <%= form.submit %>
+  </div>
+  </td></tr>
+
+  </table>
+  </div>
+
+<% end %>
+
+

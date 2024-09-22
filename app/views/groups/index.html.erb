@@ -1,0 +1,45 @@
+<div class="form_heading"><br/><br/>Your groups</div>
+
+<table class="center">
+  <tr>
+    <% if @groups.length == 0 %>
+       <th>You have no groups</th>
+   <% else %>
+      <th>Title</th>
+    <% end %>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @groups.each do |group| %>
+  <tr>
+    <td><%= group.title %></td>
+    <td><%= link_to 'Show', group %></td>
+    <td><%= link_to 'Edit', edit_group_path(group) %></td>
+    <td><%= link_to 'Leave', "/users/leave_group/#{group.id}", :confirm => 'Are you sure?' %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<div id="footerlinks">
+<%= link_to 'New Group', new_group_path %>
+</div>
+
+<% if @groups.count == 0 %>
+<div id="notes">
+You can have more than one group. 
+</div>
+<% end %>
+
+<div class="form_heading"><br/><br/>Unlocked Groups</div>
+<div id="notes">
+  (only join a group if you belong to the group of course!)
+  <br/>
+<ul>
+<% @joinable_groups.each do |g| %>
+<li><%= link_to g.title,g %></li>
+<% end %>
+</ul>
+</div>

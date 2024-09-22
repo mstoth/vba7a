@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>VIRTUAL BOOKING AGENT</title>
+	<%= csrf_meta_tags %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+	<%= stylesheet_link_tag "vba" %>
+    <%= javascript_importmap_tags %>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<meta charset="utf-8">
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+
+  <%# <script>
+
+  $( function() {
+    var handle = $( "#custom-handle" );
+    $( "#slider" ).slider({
+      create: function() {
+        handle.text( $( this ).slider( "value" ) );
+      },
+      slide: function( event, ui ) {
+        handle.text( ui.value );
+      }
+    });
+  } );
+  
+</script>
+
+
+
+  <script>
+  $( function() {
+    var select = $( "#distlbl" );
+    var slider = $( "<div id='slider'></div>" )({
+      min: 0,
+      max: 100,
+      range: "min",
+      value: select.value,
+      slide: function( event, ui ) {
+        select[ 0 ].selectedIndex = ui.value - 1;
+      }
+    });
+    $( "#minbeds" ).on( "change", function() {
+      slider.slider( "value", this.selectedIndex + 1 );
+    });
+  } );
+  </script> %>
+
+
+</head>
+
+<body>
+	<div class="heading">
+		<div id="leftside">
+		  <% if !current_user.nil? %>
+		  <%=link_to "Home", :xhome %>
+		  <% else %>
+		  <%= link_to "Home", :home %>
+		  <% end %>
+			<% if !current_user.nil? %>
+				<%=link_to "Logout", :logout  %>
+			<% else %> 
+				<%=link_to "Login", :login  %>
+			<% end %>
+			<% if !current_user.nil? && (current_user.login == "mstoth") %>
+				<%= link_to "Admin", "/admins/index" %>
+			<% end %>
+			<% if Group.joins(:image_attachment).length > 0 %>
+			    <% group_array = Group.all() %>
+				<% g=Group.where(display: false) %>
+
+				<% group_array = group_array - g %>
+				<% sel = rand(group_array.length) %>
+				<% group = group_array[sel] %>
+				
+				<% if !group.image.nil? and !group.image.filename.nil? %>
+				<%= image_tag group.image %>
+				<br/>
+				<div id="caption">
+					<%= link_to group.title, group %><br/><br/>
+				</div>
+				<% end %>
+			<% end %>
+			
+			<div id="social_left">
+			</div>
+		</div>
+
+	<div id="centertext">
+		<% if current_user.nil? %>
+			Virtual Booking Agent 
+		<% else %>
+			<% if current_user.login[0..4] == "Guest" %>
+				Virtual Booking Agent - Logged in as Guest
+			<% else %>
+				Virtual Booking Agent - Logged in as <%=current_user.login%>
+			<% end %>
+		<% end %>
+	</div>
+	
+	<div id="rightside">
+		<%= link_to "About", :about %>
+		<%= link_to "Help ", :agenthelp %>
+		<%= link_to "Forum", "https://virtualpianist.com/phpBB/index.php" %>
+
+		
+			<% if Venue.joins(:image_attachment).length > 0 %>
+			    <% venue_array = Venue.all() %>
+				<% v=Venue.where(display: false) %>
+
+				<% venue_array = venue_array - g %>
+				<% sel = rand(venue_array.length) %>
+				<% venue = venue_array[sel] %>
+				
+				<% if !venue.image.nil? and !venue.image.filename.nil? %>
+				<%= image_tag venue.image %>
+				<br/>
+				<div id="caption">
+					<%= link_to venue.name, venue %><br/><br/>
+				</div>
+				<% end %>
+			<% end %>
+
+	</div>
+	</div>	
+
+	<%= yield %>
+
+	<div id="bottom">
+	</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<table class="centerWide">
+	<tr>
+		<th>Title</th>
+		<th>Group</th>
+		<th>Location</th>
+		<th>Date</th>
+		<th>Time</th>
+		<th></th>
+	</tr>
+
+	<% @booked_concerts.each do |concert| %>
+	<tr>
+		<td><%= concert.title %></td>
+		<td><%= Group.find(concert.group_id).title %></td>
+		<td><%= concert.address %></td>
+		<td><%= concert.date.strftime('%m/%d/%y') %>
+		<td><%= concert.date.strftime('%I:%M %p') %>
+	</tr>
+	<% end %>
+</table>
+<script>
+var rs = document.getElementById('rightside');
+rs.parentNode.removeChild(rs);
+var ls = document.getElementById('leftside');
+ls.parentNode.removeChild(ls);
+var ct = document.getElementById('centertext');
+ct.parentNode.removeChild(ct);
+var b = document.getElementsByClassName('heading')[0];
+document.write(b.style.backgroundColor);
+b.style.backgroundColor = 'white';
+b = document.getElementsByTagName('html')[0];
+b.style.backgroundImage = 'none';
+b = document.getElementsByTagName('body')[0];
+b.style.backgroundImage = 'none';
+</script>

@@ -1,0 +1,12 @@
+<br/><br/>
+<div class="form_heading">
+  Password Reset
+</div>
+
+<div id="notes">
+  <%= form_tag("/password_resets/create", method:"get")  do %>
+  <%= label_tag :email, 'Enter your email '%>
+  <%= text_field_tag :email %>
+  <%= submit_tag "Request Password Reset" %>
+  <% end %>
+</div>

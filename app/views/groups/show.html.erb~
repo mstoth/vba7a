@@ -1,0 +1,83 @@
+<br/><br/><p id="notice"><%= notice %></p>
+<div class="center">
+<%= image_tag @group.picture.url(:medium) %>
+</div>
+<table class="center">
+<tr><td>
+  <b>Title:</b>
+</td><td>
+  <%= @group.title %>
+</td></tr>
+<tr><td>
+  <b>Contact:</b>
+</td><td>
+  <%= @group.contact %>
+</td></tr>
+<tr><td>
+  <b>Phone:</b>
+</td><td>
+  <%= @group.phone %>
+</td></tr>
+<tr><td>
+  <b>Street1:</b>
+</td><td>
+  <%= @group.street1 %>
+</td></tr>
+<tr><td>
+  <b>Street2:</b>
+</td><td>
+  <%= @group.street2 %>
+</td></tr>
+<tr><td>
+  <b>City:</b>
+</td><td>
+  <%= @group.city %>
+</td></tr>
+<tr><td>
+  <b>State:</b>
+</td><td>
+  <%= @group.state %>
+</td></tr>
+<tr><td>
+  <b>Zip:</b>
+</td><td>
+  <%= @group.zip %>
+</td></tr>
+<tr><td>
+  <b>Website:</b>
+</td><td>
+  <%= link_to "Group Description", @group.website %>
+</td></tr>
+<tr><td>
+  <b>Email:</b>
+</td><td>
+  <%= mail_to @group.email, @group.email %>
+</td></tr>
+</table>
+<br/>
+<% if !current_user.nil? %>
+<div id="footerlinks">
+<% if current_user.groups.include? @group %>
+<%= link_to 'Edit', edit_group_path(@group) %>  | 
+
+<% end %>
+<% if @group.locked == false %>
+<%= link_to 'Join', "/users/join_group/#{@group.id}" %> | 
+<% end %>
+<% if current_user.groups.include? @group %>
+<%= link_to 'Leave', "/users/leave_group/#{@group.id}" %>
+<% end %>
+</div>
+<% end %>
+<br/>
+<div id="notes">
+	Concerts offered by this group:<br/>
+	<% @group.concerts.each do |u| %>
+	  <% if current_user.nil? %>
+	    <%= link_to u.title, u.webpage %><br/>
+	  <% else %>
+	    <%= link_to u.title, u %><br/>
+	  <% end %>
+	<% end %>
+</div>
+	

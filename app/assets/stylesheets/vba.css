@@ -1,0 +1,354 @@
+
+html {
+	background-image: url("/assets/paper.gif") ;
+}
+
+body {
+	background-image: url("/assets/paper.gif") ;
+}
+
+#custom-handle {
+  width: 3em;
+  height: 1.6em;
+  top: 50%;
+  color: beige;
+  margin-top: -.8em;
+  text-align: center;
+  line-height: 1.6em;
+}
+
+/* css for timepicker */
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+.simple-calendar {
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.calendar-heading {
+    text-align: center;
+}
+.cal {
+    padding: 20px;
+    background-color:lightblue;
+    border-style: double;
+    border-width:1;
+    border-color:blue;
+    margin-left:20px;
+    margin-right:20px;
+}
+
+.heading {
+  background-color:lightblue; 
+  height:50px; width:100%; 
+}
+
+#current_value {
+	margin-left:30%;
+}
+#slider_container {
+	white-space: nowrap;
+	padding:10px;
+	margin-left:30%;
+	margin-top:20px;
+}
+
+#slider {
+	margin-top:20px;
+	margin-left:30%;
+	margin-right:30%;
+	width:40%;
+	background:blue;
+	
+}
+
+img.light
+{
+opacity:0.4;
+}
+
+.heading #leftside { float:left; 
+  width:25%; height:50px; 
+  background-color:silver;
+}
+
+.heading #leftside img { 
+	margin-top:40px; 
+	width:95%;
+	margin-left:2.5%;
+}
+
+.heading #leftside #social_left a:hover {
+	color: #666; 
+	background-color: #eee;
+}
+
+.heading #leftside #social_left img {
+	width:150px;
+	height:150px;
+	
+}
+.heading #rightside img { 
+	margin-top:40px; 
+	width:95%;
+	margin-left:2.5%;
+}
+
+.heading #centertext { height:50px; 
+  float:left; text-align:center; 
+  width:50%; }
+
+.heading #rightside a {
+  margin-left:20px; 
+  font-size:14pt;
+  font-family:Arnoldboecklin, fantasy; 
+  position:relative;
+  top:20px;
+  vertical-align:text-bottom;
+}
+
+.heading #leftside a.button {
+  margin-left:20px; 
+  font-size:14pt;
+  font-family:Arnoldboecklin, fantasy; 
+  position:relative;
+  top:10px;
+  vertical-align:text-top;
+}
+.heading #leftside a {
+  margin-left:20px; 
+  font-size:14pt;
+  font-family:Arnoldboecklin, fantasy; 
+  position:relative;
+  top:20px;
+  vertical-align:text-top;
+}
+.heading #rightside a {   
+  margin-left:20px; 
+  font-size:14pt;
+  font-family:Arnoldboecklin, fantasy; 
+  position:relative;
+  top:20px;
+  vertical-align:text-bottom;
+ }
+
+.heading #rightside {  
+  float:right; 
+  height:50px; width:25%; 
+  background-color:silver;
+}
+
+.heading #centertext { 
+  margin-top:20px;
+  font-size:14pt;
+  font-family:Arnoldboecklin, fantasy; 
+ }
+/* font-family:Arnoldboecklin, fantasy; */
+.heading #rightside table {
+	padding:0px;
+	width:100%;
+	margin-right:0px;
+}
+.heading table { padding:10px; }
+
+
+#leftside {
+	width:25%;
+}
+
+.form_heading { 
+  font-family:Arnoldboecklin, fantasy; 
+  font-size:14pt; 
+  text-align:center;
+  color:blue;
+ }
+
+#bottom {
+	margin-top:50px;
+	text-align:right;
+}
+#pricefield { width:8em; }
+
+#social {
+	position:absolute;
+	bottom:10px;
+	width:25%;
+	padding:10px;
+	background-color:lightblue;
+}
+
+#social_right table {
+	width:100%;
+}
+
+#social_right td {
+	padding:5px;
+}
+
+#social_left img {
+	width:200px;
+	height:200px;
+}
+#social_left {
+	position:absolute;
+	bottom:10px;
+	width:25%;
+}
+#social_right {
+	position:absolute;
+	bottom:10px;
+	width:25%;
+	background-color:lightblue;
+}
+
+#widenotes {
+  padding:20px;
+  line-height:2em;
+  border-color:blue;
+  border-style:solid;
+  margin-top:40px;
+  margin-left:auto;
+  margin-right:auto;
+  font-size:14pt;
+  font-family:Arnoldboecklin, fantasy; 
+}
+
+#notes { 
+  padding:20px;
+  line-height:2em;
+  border-color:blue;
+  border-style:solid;
+  margin-top:40px;
+  margin-left:28%;
+  margin-right:28%;
+  font-size:14pt;
+  font-family:Arnoldboecklin, fantasy; 
+
+  }
+
+#sendmsg {
+	text-align:center;
+	color:red;
+	font-size:12pt;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+#notice { 
+	width:40%;
+	margin-left:30%;
+	margin-right:30%;
+	text-align:center; 
+	font-size:14pt;
+  	font-family:Arnoldboecklin, fantasy; 
+}
+
+.venue_form {  margin-left:28%; width:50%; text-align:left; position:relative; top:10px; }
+#login_form { text-align:center; position:relative; top:10px; }
+
+#edit_form { text-align:center }
+h4 { text-align:center }
+
+#submit {
+	text-align:center;
+}
+
+#footerlinks  { 
+  font-family:Arnoldboecklin, fantasy; 
+  font-size:14pt; 
+  text-align:center;
+}
+#rightside #caption a {
+  font-family:Arnoldboecklin, fantasy; 
+  font-size:14pt; 
+  text-align:center;
+}
+#caption  a { 
+  font-family:Arnoldboecklin, fantasy; 
+  font-size:14pt; 
+  text-align:center;
+}
+
+table.home { 
+  width:45%;
+  margin-left:auto; 
+  margin-right:auto;
+  font-family:Arnoldboecklin, fantasy; 
+  font-size:14pt; 
+  text-align:center;
+  padding:5px;
+ }
+
+.homebutton {
+  border-radius:20px;
+  border-style:solid;
+  border-width:3px;
+}
+
+.home a:hover {
+	color: #666; 
+	background-color: #eee;
+}
+
+table.home td { 
+  text-align:center;
+  font-family:Arnoldboecklin, fantasy; 
+  font-size:14pt; 
+  text-align:center;
+  padding:5px;
+ }
+
+.center img {
+	margin-left:40%;
+	margin-right:40%;
+	width:20%;
+}
+table.center label { text-align:left; }
+table.center td {
+  font-family:Arnoldboecklin, fantasy; 
+  font-size:14pt; 
+	padding:5px;
+}
+
+table.centerWide  {
+	background:white;
+	float:bottom;
+	margin-bottom:0px;
+	width:90%;
+	margin-left:auto;
+	margin-right:auto;
+  	font-family:Arnoldboecklin, fantasy; 
+  	font-size:12pt; 
+	padding:5px;
+}
+table.centerWide td {
+  	font-family:Arnoldboecklin, fantasy; 
+  	font-size:12pt; 
+	padding:5px;
+}
+
+table.center {
+  width:50%;
+  margin-left:auto; 
+  margin-right:auto;
+}
+
+textarea #review_comment {
+  columns:60;
+}
+
+table.editor {
+  width:40%;
+  margin-left:auto; 
+  margin-right:auto;
+}
+
+.addressfield { 
+  float:right;
+}
