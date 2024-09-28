@@ -38,7 +38,7 @@ class Venue < ActiveRecord::Base
 
 
   def create_address
-    self.address = [self.city,self.state,self.zip].join(', ')
+    self.address = [self.street1,self.city,self.state,self.zip].join(', ')
   end
 
 
