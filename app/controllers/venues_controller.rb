@@ -94,8 +94,8 @@ class VenuesController < ApplicationController
   # GET /venues/1
   # GET /venues/1.xml
   def show
-
     @venue = Venue.find(params[:id])
+    @venue.create_address()
     @concerts = Concert.where(:venue_id=>@venue.id)
 
     respond_to do |format|
